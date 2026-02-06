@@ -34,3 +34,12 @@
   - backend/tests/integration/test_matches_repo.py
   - Docker environment setup (Dockerfile, docker-compose.yml)
 - **Notes**: Tests passed `test_create_and_retrieve_match`. Backend environment scaffolded from scratch.
+
+- **Date**: 2026-02-06
+- **Ticket**: LMM-TO-001-BE-T02 (Create Match Endpoint) (workflow: /execute-plan)
+- **Artifacts**:
+  - backend/app/presentation/routers/matches.py
+  - backend/app/application/match_service.py
+  - backend/tests/integration/test_matches_api.py
+  - specs/ArchitecturalModel.md
+- **Notes**: Endpoint `POST /api/v1/matches` verified. Integration tests passed. Architectural Model created.

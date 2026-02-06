@@ -1,0 +1,20 @@
+from fastapi import APIRouter, Depends, status
+from sqlalchemy.ext.asyncio import AsyncSession
+from app.domain.schemas.match import MatchCreate, MatchResponse
+from app.application.match_service import MatchService
+from app.infrastructure.repositories.match_repository import SQLMatchRepository
+from app.infrastructure.database import Base
+from typing import AsyncGenerator
+
+from app.dependencies import get_db
+
+router = APIRouter(prefix="/api/v1/matches", tags=["matches"])
+
+@router.post("", response_model=MatchResponse, status_code=status.HTTP_201_CREATED)
+async def create_match(
+    match_in: MatchCreate,
+    session: AsyncSession = Depends(get_db) 
+):
+    repo = SQLMatchRepository(session)
+    service = MatchService(repo)
+    return await service.create_match(match_in)

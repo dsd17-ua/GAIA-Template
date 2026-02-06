@@ -17,7 +17,7 @@ This feature covers the local-first match management system. Since it's MVP and 
    - **Scope**: Table `matches` (id, home_team, visitor_team, start_time, duration_half, current_half, is_active).
    - **Deliverables**: Alembic migration.
 
-2. - [ ] **LMM-TO-001-BE-T02 — Create Match Endpoint**
+2. - [x] **LMM-TO-001-BE-T02 — Create Match Endpoint** (2026-02-06)
    - **Type**: BE
    - **Description**: Endpoint `POST /api/v1/matches` to initialize a new match.
    - **Scope**: Pydantic models `MatchCreate`, `MatchResponse`.

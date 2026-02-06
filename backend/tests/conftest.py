@@ -3,12 +3,11 @@ import asyncio
 from typing import AsyncGenerator
 from sqlalchemy.ext.asyncio import AsyncSession, create_async_engine
 from sqlalchemy.orm import sessionmaker
-from httpx import AsyncClient
+from httpx import AsyncClient, ASGITransport
+import os
 
 from app.main import app
 from app.infrastructure.database import Base
-
-import os
 
 # Use the same DB as in docker-compose but maybe different host if running locally?
 # Assuming running inside docker or pointing to localhost:5455 for local tests
@@ -41,5 +40,5 @@ async def db_session(db_engine) -> AsyncGenerator[AsyncSession, None]:
 
 @pytest.fixture
 async def client() -> AsyncGenerator[AsyncClient, None]:
-    async with AsyncClient(app=app, base_url="http://test") as ac:
+    async with AsyncClient(transport=ASGITransport(app=app), base_url="http://test") as ac:
         yield ac
