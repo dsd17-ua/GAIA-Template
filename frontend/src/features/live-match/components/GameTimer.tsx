@@ -1,5 +1,5 @@
 import React from "react";
-import { useGameTimer, TimerState } from "../hooks/useGameTimer";
+import { useGameTimer, type TimerState } from "../hooks/useGameTimer";
 import { updateMatchClock } from "../api/updateClock";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";

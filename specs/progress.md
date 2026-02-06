@@ -64,3 +64,10 @@
   - `frontend/src/features/live-match/components/GameTimer.tsx`
   - `frontend/src/features/live-match/api/updateClock.ts`
 - **Notes**: Implemented Hook and Component for Match Timer. Tests passed.
+
+- **Milestone**: Started LMM-BUG-001 (Fix missing matches table) (workflow: /fix-error)
+- **Milestone**: Completed LMM-BUG-001 (Fix missing matches table) (workflow: /fix-error)
+- **Artifacts**:
+  - `backend/alembic/versions/4048678bf782_add_clock_state.py`
+  - `specs/features/live-match-management/plan_LMM-BUG-001.md`
+- **Notes**: Fixed migration overlap. Reset DB state and applied Correct migrations. 500 Error resolved.

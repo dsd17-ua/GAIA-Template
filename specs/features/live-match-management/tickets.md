@@ -56,6 +56,7 @@ This feature covers the local-first match management system. Since it's MVP and 
    - **Description**: Build a robust `useGameTimer` hook.
    - **Scope**: `setInterval` logic, precise time tracking (delta), specialized Pause/Resume controls.
    - **Deliverables**: `<GameTimer />` component, Unit tests for hook.
+- [x] (2026-02-06) **LMM-BUG-001**: Fix missing matches table (500 Error)
 
 ---
 
