@@ -32,7 +32,10 @@ export const MatchSetupForm = () => {
     });
 
     const onSubmit = (data: MatchFormData) => {
-        mutate(data, {
+        mutate({
+            ...data,
+            start_time: new Date().toISOString(),
+        }, {
             onSuccess: (match) => {
                 navigate(`/matches/${match.id}/dashboard`);
             },

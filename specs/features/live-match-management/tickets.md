@@ -39,7 +39,7 @@ This feature covers the local-first match management system. Since it's MVP and 
 
 #### Tickets for LMM-TO-002
 
-1. - [ ] **LMM-TO-002-DB-T01 — Add Clock State to Matches**
+1. - [x] **LMM-TO-002-DB-T01 — Add Clock State to Matches** (2026-02-06)
    - **Type**: DB
    - **Description**: Add columns to track clock state (last_start_ts, accumulated_time_ms, is_running).
    - **Scope**: Migration to alter `matches` table.

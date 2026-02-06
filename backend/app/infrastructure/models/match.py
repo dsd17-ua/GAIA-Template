@@ -14,3 +14,8 @@ class MatchModel(Base):
     duration_half = Column(Integer, default=30, nullable=False)
     current_half = Column(Integer, default=1, nullable=False)
     is_active = Column(Boolean, default=True, nullable=False)
+    
+    # Clock State
+    last_start_ts = Column(DateTime(timezone=True), nullable=True)
+    accumulated_time_ms = Column(Integer, default=0, nullable=False)
+    is_running = Column(Boolean, default=False, nullable=False)
