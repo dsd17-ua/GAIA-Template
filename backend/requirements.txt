@@ -1,0 +1,13 @@
+fastapi>=0.100.0
+uvicorn[standard]
+sqlalchemy>=2.0.0
+alembic
+asyncpg
+pydantic>=2.0.0
+pydantic-settings
+python-multipart
+# Dev dependencies
+pytest
+pytest-asyncio
+pytest-cov
+httpx
