@@ -72,7 +72,9 @@ This feature covers the local-first match management system. Since it's MVP and 
    - **Scope**: Migration.
    - **Deliverables**: Migration.
 
-2. - [ ] **LMM-TO-003-BE-T02 — Update Score Endpoint**
+   - **Deliverables**: Migration.
+
+2. - [x] **LMM-TO-003-BE-T02 — Update Score Endpoint** (2026-02-06)
    - **Type**: BE
    - **Description**: `PATCH /matches/{id}/score` to update goals.
    - **Scope**: Atomic updates preferred or simple state overwrite for MVP.
