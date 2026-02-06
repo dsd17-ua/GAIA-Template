@@ -77,3 +77,9 @@
   - `backend/alembic/versions/62a7da274c8d_add_score_columns.py`
   - `backend/tests/integration/test_matches_score.py`
 - **Notes**: Added score columns to DB and Domain. Verified persistence.
+
+- **Milestone**: Completed LMM-TO-003-BE-T02 (Score Endpoint)(workflow: /execute-plan)
+- **Artifacts**:
+  - `backend/app/presentation/routers/matches.py`
+  - `backend/app/application/match_service.py`
+- **Notes**: Implemented PATCH /matches/{id}/score. Verified with integration tests.

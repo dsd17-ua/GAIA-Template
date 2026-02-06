@@ -1,6 +1,6 @@
 from uuid import uuid4
 from app.domain.match import Match
-from app.domain.schemas.match import MatchCreate
+from app.domain.schemas.match import MatchCreate, MatchScoreUpdate
 from app.domain.ports.match_repository import MatchRepository
 
 # [Feature: Live Match Management] [Story: LMM-TO-001] [Ticket: LMM-TO-001-BE-T02]
@@ -38,4 +38,21 @@ class MatchService:
                 match.is_running = False
                 match.last_start_ts = None
                 
+        return await self.repository.update(match)
+
+    async def update_match_score(self, match_id, score_in: MatchScoreUpdate) -> Match:
+        match = await self.repository.get_by_id(match_id)
+        if not match:
+            raise ValueError("Match not found")
+            
+        if score_in.score_local is not None:
+            if score_in.score_local < 0:
+                 raise ValueError("Score cannot be negative")
+            match.score_local = score_in.score_local
+            
+        if score_in.score_visitor is not None:
+             if score_in.score_visitor < 0:
+                 raise ValueError("Score cannot be negative")
+             match.score_visitor = score_in.score_visitor
+             
         return await self.repository.update(match)

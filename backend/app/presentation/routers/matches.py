@@ -1,6 +1,6 @@
 from fastapi import APIRouter, Depends, status
 from sqlalchemy.ext.asyncio import AsyncSession
-from app.domain.schemas.match import MatchCreate, MatchResponse, MatchClockUpdate
+from app.domain.schemas.match import MatchCreate, MatchResponse, MatchClockUpdate, MatchScoreUpdate
 from app.application.match_service import MatchService
 from app.infrastructure.repositories.match_repository import SQLMatchRepository
 from app.infrastructure.database import Base
@@ -28,3 +28,13 @@ async def update_match_clock(
     repo = SQLMatchRepository(session)
     service = MatchService(repo)
     return await service.update_match_clock(match_id, clock_update.action)
+
+@router.patch("/{match_id}/score", response_model=MatchResponse)
+async def update_match_score(
+    match_id,
+    score_update: MatchScoreUpdate,
+    session: AsyncSession = Depends(get_db)
+):
+    repo = SQLMatchRepository(session)
+    service = MatchService(repo)
+    return await service.update_match_score(match_id, score_update)

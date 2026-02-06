@@ -70,3 +70,30 @@ async def test_update_match_clock(client: AsyncClient, db_session):
     assert response_stop.status_code == 200
     data_stop = response_stop.json()
     assert data_stop["is_running"] is False
+
+@pytest.mark.integration
+@pytest.mark.asyncio
+async def test_update_match_score(client: AsyncClient, db_session):
+    # Given: A match exists
+    create_payload = {
+        "home_team": "Team Score",
+        "visitor_team": "Visitors Score",
+        "start_time": datetime.utcnow().isoformat(),
+        "duration_half": 30
+    }
+    create_response = await client.post("/api/v1/matches", json=create_payload)
+    match_id = create_response.json()["id"]
+
+    # When: We update the score
+    score_payload = {
+        "score_local": 2,
+        "score_visitor": 1
+    }
+    response = await client.patch(f"/api/v1/matches/{match_id}/score", json=score_payload)
+
+    # Then
+    assert response.status_code == 200
+    data = response.json()
+    assert data["score_local"] == 2
+    assert data["score_visitor"] == 1
+
