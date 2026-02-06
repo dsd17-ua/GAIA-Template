@@ -24,7 +24,7 @@ This feature covers the local-first match management system. Since it's MVP and 
    - **Dependencies**: T01.
    - **Deliverables**: Validated endpoint.
 
-3. - [ ] **LMM-TO-001-FE-T03 — Match Setup Form**
+3. - [x] **LMM-TO-001-FE-T03 — Match Setup Form** (2026-02-06)
    - **Type**: FE
    - **Description**: UI form to input team names and create match.
    - **Scope**: Inputs for Local/Visitor names. "Start Match" button.
