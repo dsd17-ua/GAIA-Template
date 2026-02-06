@@ -24,9 +24,40 @@ class SQLMatchRepository(MatchRepository):
         await self.session.refresh(model)
         return match
 
+        if model:
+            return Match.model_validate(model)
+        return None
+
     async def get_by_id(self, id) -> Match | None:
         result = await self.session.execute(select(MatchModel).where(MatchModel.id == id))
         model = result.scalar_one_or_none()
         if model:
             return Match.model_validate(model)
         return None
+
+    async def update(self, match: Match) -> Match:
+        # We use explicit update or merge. Since 'match' is a Pydantic object, 
+        # we can't just merge it directly into SQL session unless mapped.
+        # We'll retrieve the model and update fields, or use an UPDATE statement.
+        # Retrieving and updating is safer for ORM consistency.
+        
+        result = await self.session.execute(select(MatchModel).where(MatchModel.id == match.id))
+        model = result.scalar_one_or_none()
+        
+        if not model:
+            raise ValueError(f"Match {match.id} not found")
+
+        # Update fields
+        model.home_team = match.home_team
+        model.visitor_team = match.visitor_team
+        model.start_time = match.start_time
+        model.duration_half = match.duration_half
+        model.current_half = match.current_half
+        model.is_active = match.is_active
+        model.last_start_ts = match.last_start_ts
+        model.accumulated_time_ms = match.accumulated_time_ms
+        model.is_running = match.is_running
+        
+        await self.session.commit()
+        await self.session.refresh(model)
+        return Match.model_validate(model)

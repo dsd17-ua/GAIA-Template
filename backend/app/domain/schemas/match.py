@@ -19,6 +19,11 @@ class MatchCreate(BaseModel):
         }
     })
 
+
+# [Feature: Live Match Management] [Story: LMM-TO-002] [Ticket: LMM-TO-002-BE-T02]
+class MatchClockUpdate(BaseModel):
+    action: str  # START or STOP
+
 # [Feature: Live Match Management] [Story: LMM-TO-001] [Ticket: LMM-TO-001-BE-T02]
 class MatchResponse(BaseModel):
     id: UUID
@@ -28,5 +33,10 @@ class MatchResponse(BaseModel):
     duration_half: int
     current_half: int
     is_active: bool
+    
+    # Clock State
+    last_start_ts: Optional[datetime] = None
+    accumulated_time_ms: int = 0
+    is_running: bool = False
     
     model_config = ConfigDict(from_attributes=True)

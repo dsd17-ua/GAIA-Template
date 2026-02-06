@@ -11,6 +11,9 @@ class Match(BaseModel):
     duration_half: int = 30
     current_half: int = 1
     is_active: bool = True
+    last_start_ts: datetime | None = None
+    accumulated_time_ms: int = 0
+    is_running: bool = False
     
     # Clock state (LMM-TO-002 preparation, but good to have rudimentary fields if needed, 
     # but strictly per plan I should focus on TO-001 scope. 

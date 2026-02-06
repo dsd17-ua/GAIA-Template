@@ -51,3 +51,16 @@
   - frontend/src/features/live-match/api/createMatch.ts
   - frontend/src/features/live-match/components/MatchSetupForm.test.tsx
 - **Notes**: Implemented Match Setup Form with Validations and API integration. Tests passed.
+- **Milestone**: Completed LMM-TO-002-BE-T02 (Clock Endpoint) (workflow: /execute-plan)
+- **Artifacts**:
+  - `backend/app/application/match_service.py`
+  - `backend/app/presentation/routers/matches.py`
+  - `backend/tests/integration/test_matches_api.py`
+  - `backend/app/domain/schemas/match.py`
+- **Notes**: Implemented logic for START/STOP clock, handled asyncio loop issues in tests.
+- **Milestone**: Completed LMM-TO-002-FE-T03 (Game Clock Frontend) (workflow: /execute-plan)
+- **Artifacts**:
+  - `frontend/src/features/live-match/hooks/useGameTimer.ts`
+  - `frontend/src/features/live-match/components/GameTimer.tsx`
+  - `frontend/src/features/live-match/api/updateClock.ts`
+- **Notes**: Implemented Hook and Component for Match Timer. Tests passed.

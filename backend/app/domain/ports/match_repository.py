@@ -10,3 +10,7 @@ class MatchRepository(ABC):
     @abstractmethod
     async def get_by_id(self, id) -> Match | None:
         pass
+
+    @abstractmethod
+    async def update(self, match: Match) -> Match:
+        pass

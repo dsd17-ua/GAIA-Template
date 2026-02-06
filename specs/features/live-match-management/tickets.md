@@ -45,13 +45,13 @@ This feature covers the local-first match management system. Since it's MVP and 
    - **Scope**: Migration to alter `matches` table.
    - **Deliverables**: Alembic migration.
 
-2. - [ ] **LMM-TO-002-BE-T02 — Update Clock Endpoint**
+2. - [x] **LMM-TO-002-BE-T02 — Endpoint `PATCH /api/v1/matches/{id}/clock` (Start/Stop)** (2026-02-06)
    - **Type**: BE
    - **Description**: Endpoint `PATCH /matches/{id}/clock` to sync time state.
    - **Scope**: Logic to calculate server-side time or trust client timestamp (MVP: trust client or simple sync).
    - **Dependencies**: T01.
 
-3. - [ ] **LMM-TO-002-FE-T03 — Timer Component (Hook)**
+3. - [x] (2026-02-06) **LMM-TO-002-FE-T03**: Game Clock Frontend t (Hook)**
    - **Type**: FE
    - **Description**: Build a robust `useGameTimer` hook.
    - **Scope**: `setInterval` logic, precise time tracking (delta), specialized Pause/Resume controls.

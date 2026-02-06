@@ -17,3 +17,25 @@ class MatchService:
             duration_half=schema.duration_half
         )
         return await self.repository.save(match)
+
+    async def update_match_clock(self, match_id, action: str) -> Match:
+        match = await self.repository.get_by_id(match_id)
+        if not match:
+            raise ValueError("Match not found")
+            
+        from datetime import datetime, timezone
+        now = datetime.now(timezone.utc)
+
+        if action == "START":
+            if not match.is_running:
+                match.is_running = True
+                match.last_start_ts = now
+        
+        elif action == "STOP":
+            if match.is_running and match.last_start_ts:
+                delta = now - match.last_start_ts
+                match.accumulated_time_ms += int(delta.total_seconds() * 1000)
+                match.is_running = False
+                match.last_start_ts = None
+                
+        return await self.repository.update(match)
