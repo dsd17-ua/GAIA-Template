@@ -17,7 +17,12 @@ class SQLMatchRepository(MatchRepository):
             start_time=match.start_time,
             duration_half=match.duration_half,
             current_half=match.current_half,
-            is_active=match.is_active
+            is_active=match.is_active,
+            last_start_ts=match.last_start_ts,
+            accumulated_time_ms=match.accumulated_time_ms,
+            is_running=match.is_running,
+            score_local=match.score_local,
+            score_visitor=match.score_visitor
         )
         self.session.add(model)
         await self.session.commit()
@@ -57,6 +62,8 @@ class SQLMatchRepository(MatchRepository):
         model.last_start_ts = match.last_start_ts
         model.accumulated_time_ms = match.accumulated_time_ms
         model.is_running = match.is_running
+        model.score_local = match.score_local
+        model.score_visitor = match.score_visitor
         
         await self.session.commit()
         await self.session.refresh(model)

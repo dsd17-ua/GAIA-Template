@@ -19,3 +19,7 @@ class MatchModel(Base):
     last_start_ts = Column(DateTime(timezone=True), nullable=True)
     accumulated_time_ms = Column(Integer, default=0, nullable=False)
     is_running = Column(Boolean, default=False, nullable=False)
+
+    # Score State
+    score_local = Column(Integer, default=0, nullable=False)
+    score_visitor = Column(Integer, default=0, nullable=False)

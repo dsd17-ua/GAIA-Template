@@ -66,7 +66,7 @@ This feature covers the local-first match management system. Since it's MVP and 
 
 #### Tickets for LMM-TO-003
 
-1. - [ ] **LMM-TO-003-DB-T01 — Add Scores to Matches**
+1. - [x] **LMM-TO-003-DB-T01 — Add Scores to Matches** (2026-02-06)
    - **Type**: DB
    - **Description**: Add `score_local` and `score_visitor` columns.
    - **Scope**: Migration.

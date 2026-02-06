@@ -71,3 +71,9 @@
   - `backend/alembic/versions/4048678bf782_add_clock_state.py`
   - `specs/features/live-match-management/plan_LMM-BUG-001.md`
 - **Notes**: Fixed migration overlap. Reset DB state and applied Correct migrations. 500 Error resolved.
+
+- **Milestone**: Completed LMM-TO-003-DB-T01 (Add Scores DB)(workflow: /execute-plan)
+- **Artifacts**:
+  - `backend/alembic/versions/62a7da274c8d_add_score_columns.py`
+  - `backend/tests/integration/test_matches_score.py`
+- **Notes**: Added score columns to DB and Domain. Verified persistence.

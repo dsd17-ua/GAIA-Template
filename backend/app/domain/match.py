@@ -15,6 +15,10 @@ class Match(BaseModel):
     accumulated_time_ms: int = 0
     is_running: bool = False
     
+    # Score State
+    score_local: int = 0
+    score_visitor: int = 0
+    
     # Clock state (LMM-TO-002 preparation, but good to have rudimentary fields if needed, 
     # but strictly per plan I should focus on TO-001 scope. 
     # Plan says: "Clock state -> Covered in TO-002". So I will omit specific clock fields for now).

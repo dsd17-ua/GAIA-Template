@@ -15,5 +15,7 @@ erDiagram
         datetime last_start_ts
         int accumulated_time_ms
         bool is_running
+        int score_local
+        int score_visitor
     }
 ```
