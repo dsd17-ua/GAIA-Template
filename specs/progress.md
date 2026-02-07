@@ -133,3 +133,17 @@
   - **Error**: `SyntaxError` due to missing export (actually `verbatimModuleSyntax` issue).
   - **Root cause**: Type imports were treated as value imports by build tool.
   - **Fix**: Added `import type` modifier to `MatchEvent` and `CreateMatchEvent` imports.
+
+- **Date**: 2026-02-07
+- **Milestone**: Verified LMM-TO-004 (Disciplinary Sanctions)
+- **Artifacts**:
+  - `walkthrough.md`
+  - `backend/alembic/versions/65400620b1ea_create_match_events_table.py`
+- **Notes**: Verification successful. Found and fixed critical bug (missing `match_events` table migration). Confirmed E2E flow via Browser.
+
+- **Date**: 2026-02-07
+- **Milestone**: Verified LMM-BUG-005 (Team Selection UI)
+- **Artifacts**:
+  - `walkthrough.md`
+  - `frontend/src/features/live-match/components/AddExclusionDialog.tsx`
+- **Notes**: Replaced generic buttons with visual toggle group (Ring + Checkmark) for clarity.

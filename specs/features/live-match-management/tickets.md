@@ -127,6 +127,12 @@ This feature covers the local-first match management system. Since it's MVP and 
    - **Scope**: `useMatchEvents.ts`, `ExclusionList.tsx`, etc.
    - **Deliverables**: Working build.
 
+5. - [x] **LMM-BUG-005 — Improve Team Selection Visibility** (2026-02-07)
+   - **Type**: UX/BUG
+   - **Description**: The team selection in `AddExclusionDialog` is ambiguous. Needs better visual cues (colors/buttons) to distinguish Home vs Visitor.
+   - **Scope**: `AddExclusionDialog.tsx`.
+   - **Deliverables**: Improved UI for team selection.
+
 ---
 
 ### Story: LMM-TO-005 — Timeouts

@@ -10,6 +10,10 @@ describe('ExclusionList', () => {
     });
 
     it('renders active exclusions', () => {
+        vi.useFakeTimers();
+        const now = new Date('2026-02-07T12:00:00Z');
+        vi.setSystemTime(now);
+
         const exclusions = [
             {
                 id: '1',
@@ -18,12 +22,14 @@ describe('ExclusionList', () => {
                 team_side: TeamSide.LOCAL,
                 minute: 10,
                 player_number: 5,
-                created_at: new Date().toISOString()
+                created_at: now.toISOString()
             }
         ];
         render(<ExclusionList exclusions={exclusions} onAddExclusion={() => { }} />);
         expect(screen.getByText('#5')).toBeInTheDocument();
-        expect(screen.getByText('2:00')).toBeInTheDocument(); // Assuming 2 min start
+        expect(screen.getByText('2:00')).toBeInTheDocument();
+
+        vi.useRealTimers();
     });
 
     it('calls onAddExclusion when button clicked', () => {
