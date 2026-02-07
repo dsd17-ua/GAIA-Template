@@ -1,6 +1,7 @@
 from uuid import uuid4
+from datetime import datetime
 from app.domain.match import Match
-from app.domain.schemas.match import MatchCreate, MatchScoreUpdate
+from app.domain.schemas.match import MatchCreate, MatchResponse, MatchClockUpdate, MatchScoreUpdate
 from app.domain.schemas.event import CreateMatchEvent, MatchEventResponse
 from app.domain.ports.match_repository import MatchRepository
 
@@ -9,15 +10,16 @@ class MatchService:
     def __init__(self, repository: MatchRepository):
         self.repository = repository
 
-    async def create_match(self, schema: MatchCreate) -> Match:
-        match = Match(
-            id=uuid4(),
-            home_team=schema.home_team,
-            visitor_team=schema.visitor_team,
-            start_time=schema.start_time,
-            duration_half=schema.duration_half
-        )
-        return await self.repository.save(match)
+    async def create_match(self, match_create: MatchCreate) -> MatchResponse:
+        match_data = match_create.model_dump()
+        match_data["id"] = uuid4()
+        match_data["is_active"] = True
+        
+        if match_data.get("start_time") is None:
+            match_data["start_time"] = datetime.now()
+            
+        new_match = Match(**match_data)
+        return await self.repository.save(new_match)
 
     async def update_match_clock(self, match_id, action: str) -> Match:
         match = await self.repository.get_by_id(match_id)

@@ -7,7 +7,7 @@ from typing import Optional
 class MatchCreate(BaseModel):
     home_team: str
     visitor_team: str
-    start_time: datetime
+    start_time: Optional[datetime] = None
     duration_half: int = 30
     
     model_config = ConfigDict(json_schema_extra={
@@ -28,6 +28,8 @@ class MatchResponse(BaseModel):
     duration_half: int
     current_half: int
     is_active: bool
+    score_local: int
+    score_visitor: int
     
 
     model_config = ConfigDict(from_attributes=True)
