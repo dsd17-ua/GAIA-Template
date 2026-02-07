@@ -103,13 +103,13 @@ This feature covers the local-first match management system. Since it's MVP and 
 
 #### Tickets for LMM-TO-004
 
-1. - [ ] **LMM-TO-004-DB-T01 — Create Match Events Table**
+1. - [x] **LMM-TO-004-DB-T01 — Create Match Events Table**
    - **Type**: DB
    - **Description**: Table `match_events` for log (goals, fouls, exclusions).
    - **Scope**: `id`, `match_id`, `event_type` (GOAL, 2MIN, YELLOW, RED), `team_side`, `minute`, `player_number`.
    - **Deliverables**: Migration.
 
-2. - [ ] **LMM-TO-004-BE-T02 — Log Event Endpoint**
+2. - [x] **LMM-TO-004-BE-T02 — Log Event Endpoint**
    - **Type**: BE
    - **Description**: `POST /matches/{id}/events`.
    - **Scope**: Generic event logger.

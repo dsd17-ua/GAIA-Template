@@ -147,3 +147,10 @@
   - `walkthrough.md`
   - `frontend/src/features/live-match/components/AddExclusionDialog.tsx`
 - **Notes**: Replaced generic buttons with visual toggle group (Ring + Checkmark) for clarity.
+
+- **Date**: 2026-02-07
+- **Milestone**: Completed LMM-TO-005-DB-T01 (Timeout DB Support)
+- **Artifacts**:
+  - `backend/tests/integration/test_timeout_event.py`
+  - `backend/app/infrastructure/models/match_event.py`
+- **Notes**: Verified `TIMEOUT` event type persistence with integration test. (Enum was already present from previous recovery).
