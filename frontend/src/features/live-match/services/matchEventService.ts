@@ -1,17 +1,21 @@
 import { api } from '@/api/http';
 
-export enum MatchEventType {
-    GOAL = "GOAL",
-    YELLOW_CARD = "YELLOW_CARD",
-    RED_CARD = "RED_CARD",
-    TWO_MIN = "TWO_MIN",
-    TIMEOUT = "TIMEOUT"
-}
+export const MatchEventType = {
+    GOAL: "GOAL",
+    YELLOW_CARD: "YELLOW_CARD",
+    RED_CARD: "RED_CARD",
+    TWO_MIN: "TWO_MIN",
+    TIMEOUT: "TIMEOUT"
+} as const;
 
-export enum TeamSide {
-    LOCAL = "LOCAL",
-    VISITOR = "VISITOR"
-}
+export type MatchEventType = typeof MatchEventType[keyof typeof MatchEventType];
+
+export const TeamSide = {
+    LOCAL: "LOCAL",
+    VISITOR: "VISITOR"
+} as const;
+
+export type TeamSide = typeof TeamSide[keyof typeof TeamSide];
 
 export interface MatchEvent {
     id: string;

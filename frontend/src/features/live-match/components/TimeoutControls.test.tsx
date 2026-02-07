@@ -1,5 +1,6 @@
 
 import { render, screen, fireEvent } from '@testing-library/react';
+import { describe, test, expect, vi, beforeEach } from 'vitest';
 import { TimeoutControls } from './TimeoutControls';
 import { TeamSide } from '../services/matchEventService';
 import '@testing-library/jest-dom';
