@@ -1,28 +1,46 @@
-import React from "react";
 import { useParams } from "react-router-dom";
 import { GameTimer } from "../components/GameTimer";
 import { ScoreBoard } from "../components/ScoreBoard";
 import { useMatch } from "../api/getMatch";
 import { useMatchScore } from "../hooks/useMatchScore";
 import { useMatchEvents } from "../hooks/useMatchEvents";
+import { useMatchPersistence } from '../hooks/useMatchPersistence';
+import { storageService } from '../services/storage';
 import { ExclusionList } from "../components/ExclusionList";
 import { AddExclusionDialog } from "../components/AddExclusionDialog";
 import { TimeoutControls } from "../components/TimeoutControls";
 import { MatchEventType, TeamSide } from "../services/matchEventService";
-import { useState } from "react";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
+import { useState, useMemo } from "react";
 
 export const MatchDashboardPage: React.FC = () => {
-    const { id } = useParams<{ id: string }>();
-    const { data: match, isLoading } = useMatch(id || "");
-    const { updateScore, isUpdating } = useMatchScore(id || "");
-    const { exclusions, events, addEvent } = useMatchEvents(id || "");
+    const { matchId } = useParams<{ matchId: string }>();
+    // const navigate = useNavigate(); // Removed as per instruction
+
+    // 1. Load persisted state synchronously (lazy initializer)
+    const persistedState = useMemo(() => {
+        if (!matchId) return null;
+        return storageService.loadMatchState(matchId);
+    }, [matchId]);
+
+    // 2. Initialize hooks
+    const { data: match, isLoading } = useMatch(matchId!); // Removed 'error' as per instruction
+    const { updateScore, isUpdating } = useMatchScore(matchId!);
+
+    // Initialize events with persisted data if available
+    const { events, exclusions, addEvent } = useMatchEvents( // Removed 'isCreating' as per instruction
+        matchId!,
+        persistedState?.events || []
+    );
+
+    // 3. Enable Persistence Sync
+    useMatchPersistence(matchId, match, events);
     const [isExclusionModalOpen, setIsExclusionModalOpen] = useState(false);
 
     const timeoutsLocal = events.filter(e => e.event_type === MatchEventType.TIMEOUT && e.team_side === TeamSide.LOCAL).length;
     const timeoutsVisitor = events.filter(e => e.event_type === MatchEventType.TIMEOUT && e.team_side === TeamSide.VISITOR).length;
 
-    if (!id) return <div>Invalid Match ID</div>;
+    if (!matchId) return <div>Invalid Match ID</div>;
     if (isLoading) return <div>Loading match...</div>;
     if (!match) return <div>Match not found</div>;
 
@@ -38,7 +56,7 @@ export const MatchDashboardPage: React.FC = () => {
                         <CardTitle>Game Clock</CardTitle>
                     </CardHeader>
                     <CardContent>
-                        <GameTimer matchId={id} initialState={{
+                        <GameTimer matchId={matchId!} initialState={{
                             accumulatedTimeMs: match.accumulated_time_ms || 0,
                             lastStartTs: match.last_start_ts || null,
                             isRunning: match.is_running || false

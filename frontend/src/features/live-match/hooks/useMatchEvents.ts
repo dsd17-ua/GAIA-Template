@@ -2,8 +2,8 @@ import { useState } from 'react';
 import { matchEventService } from '@/features/live-match/services/matchEventService';
 import type { MatchEvent, CreateMatchEvent } from '@/features/live-match/services/matchEventService';
 
-export const useMatchEvents = (matchId: string) => {
-    const [events, setEvents] = useState<MatchEvent[]>([]);
+export const useMatchEvents = (matchId: string, initialEvents: MatchEvent[] = []) => {
+    const [events, setEvents] = useState<MatchEvent[]>(initialEvents);
     const [isCreating, setIsCreating] = useState(false);
 
     const addEvent = async (event: CreateMatchEvent) => {
