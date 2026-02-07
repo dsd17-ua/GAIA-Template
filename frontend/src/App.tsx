@@ -13,7 +13,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Navigate to="/matches/new" replace />} />
           <Route path="/matches/new" element={<NewMatchPage />} />
-          <Route path="/matches/:id/dashboard" element={<MatchDashboardPage />} />
+          <Route path="/matches/:matchId/dashboard" element={<MatchDashboardPage />} />
         </Routes>
       </BrowserRouter>
     </QueryClientProvider>
