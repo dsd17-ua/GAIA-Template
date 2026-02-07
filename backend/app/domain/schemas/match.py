@@ -36,3 +36,6 @@ class MatchScoreUpdate(BaseModel):
     score_local: Optional[int] = None
     score_visitor: Optional[int] = None
 
+class MatchClockUpdate(BaseModel):
+    action: str  # "START" or "STOP"
+

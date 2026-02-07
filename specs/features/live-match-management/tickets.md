@@ -168,13 +168,19 @@ This feature covers the local-first match management system. Since it's MVP and 
 
 #### Tickets for LMM-TO-006
 
-1. - [ ] **LMM-TO-006-FE-T01 — LocalStorage Sync Layer**
+1. - [x] **LMM-BUG-007**: Fix Timeout Clock Reset & UI Clarity. (2026-02-07)
+  - **Context**: User reported that calling timeout resets clock to 0 instead of pausing, and UI is unclear.
+  - **Root Cause**: Backend `TIMEOUT` event does not stop clock; Frontend relies on backend state. Unclear UI.
+  - **Fix**: Update `MatchService` to pause clock on timeout. Update `TimeoutControls` to show active timeout.
+   - **Deliverables**: Robust restore on reload.
+
+2. - [ ] **LMM-TO-006-FE-T01 — LocalStorage Sync Layer**
    - **Type**: FE
    - **Description**: Implement a persistency layer (middleware or effect) that saves Match State to `localStorage` on every change.
    - **Scope**: `useLocalStorage` for the main `useMatch` hook.
    - **Deliverables**: Robust restore on reload.
 
-2. - [ ] **LMM-TO-006-FE-T02 — State Rehydration Logic**
+3. - [ ] **LMM-TO-006-FE-T02 — State Rehydration Logic**
    - **Type**: FE
    - **Description**: Logic to decide whether to load from Server or LocalStorage (Conflict resolution strategy: simplified "Local wins" for MVP).
    - **Scope**: Hook initialization.

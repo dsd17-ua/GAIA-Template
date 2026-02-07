@@ -85,6 +85,11 @@ export const MatchDashboardPage: React.FC = () => {
                             isGameRunning={match.is_running || false}
                             homeTeamName={match.home_team}
                             visitorTeamName={match.visitor_team}
+                            activeTimeoutTeam={
+                                !match.is_running && events.length > 0 && events[events.length - 1].event_type === MatchEventType.TIMEOUT
+                                    ? events[events.length - 1].team_side
+                                    : null
+                            }
                             onCallTimeout={(side) => addEvent({
                                 event_type: MatchEventType.TIMEOUT,
                                 team_side: side,

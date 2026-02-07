@@ -61,4 +61,24 @@ describe('TimeoutControls', () => {
         expect(buttons[0]).toBeDisabled();
         expect(buttons[1]).toBeDisabled();
     });
+
+    test('displays timeout indicator when activeTimeoutTeam is set and game is stopped', () => {
+        render(<TimeoutControls
+            {...defaultProps}
+            isGameRunning={false}
+            activeTimeoutTeam={TeamSide.LOCAL}
+        />);
+
+        expect(screen.getByText('TIMEOUT: Home')).toBeInTheDocument();
+    });
+
+    test('does not display timeout indicator when game is running', () => {
+        render(<TimeoutControls
+            {...defaultProps}
+            isGameRunning={true}
+            activeTimeoutTeam={TeamSide.LOCAL}
+        />);
+
+        expect(screen.queryByText('TIMEOUT: Home')).not.toBeInTheDocument();
+    });
 });
