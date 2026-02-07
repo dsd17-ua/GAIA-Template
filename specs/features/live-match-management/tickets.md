@@ -141,7 +141,7 @@ This feature covers the local-first match management system. Since it's MVP and 
 
 #### Tickets for LMM-TO-005
 
-1. - [ ] **LMM-TO-005-DB-T01 — Add Timeout Columns**
+1. - [x] **LMM-TO-005-DB-T01 — Add Timeout Columns** (2026-02-07)
    - **Type**: DB
    - **Description**: Track used timeouts `timeouts_local`, `timeouts_visitor` in `matches` or aggregate from events.
    - **Scope**: Migration or Reuse `match_events`. Let's use `matches` count for simplicity or events. (Decision: Events table is better). Reuse LMM-TO-004-DB-T01.
