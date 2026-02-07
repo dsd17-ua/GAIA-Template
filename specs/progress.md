@@ -99,3 +99,11 @@
   - `frontend/src/features/live-match/components/ScoreBoard.tsx`
   - `frontend/src/features/live-match/pages/MatchDashboardPage.tsx`
 - **Notes**: Scoreboard now displays actual team names instead of "Local"/"Visitor". Verified with tests.
+
+- **Date**: 2026-02-07
+- **Milestone**: Completed LMM-TO-004-DB-T01 (Match Events Table) (workflow: /execute-plan)
+- **Artifacts**:
+  - `backend/app/infrastructure/models/match_event.py`
+  - `backend/alembic/versions/*_create_match_events_table.py`
+  - `backend/tests/integration/test_match_events_repo.py`
+- **Notes**: Created table `match_events` with FK to `matches`. Verified via async integration tests.
