@@ -25,3 +25,8 @@ export type ClockAction = 'START' | 'STOP';
 export interface ClockUpdatePayload {
     action: ClockAction;
 }
+
+export interface MatchScoreUpdate {
+    score_local?: number;
+    score_visitor?: number;
+}

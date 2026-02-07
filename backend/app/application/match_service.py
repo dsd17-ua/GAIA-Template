@@ -56,3 +56,9 @@ class MatchService:
              match.score_visitor = score_in.score_visitor
              
         return await self.repository.update(match)
+
+    async def get_match(self, match_id) -> Match:
+        match = await self.repository.get_by_id(match_id)
+        if not match:
+            raise ValueError("Match not found")
+        return match

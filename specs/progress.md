@@ -83,3 +83,12 @@
   - `backend/app/presentation/routers/matches.py`
   - `backend/app/application/match_service.py`
 - **Notes**: Implemented PATCH /matches/{id}/score. Verified with integration tests.
+
+- **Date**: 2026-02-07
+- **Milestone**: Completed LMM-TO-003-FE-T03 (Scoreboard UI) (workflow: /execute-plan)
+- **Artifacts**:
+  - `frontend/src/features/live-match/components/ScoreBoard.tsx`
+  - `frontend/src/features/live-match/components/ScoreBoard.tsx`
+  - `frontend/src/features/live-match/pages/MatchDashboardPage.tsx`
+  - `backend/app/presentation/routers/matches.py` (Added GET endpoint)
+- **Notes**: Integrated Scoreboard into dashboard. Added optimistic UI updates and GET endpoint.

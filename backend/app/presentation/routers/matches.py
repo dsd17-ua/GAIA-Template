@@ -38,3 +38,12 @@ async def update_match_score(
     repo = SQLMatchRepository(session)
     service = MatchService(repo)
     return await service.update_match_score(match_id, score_update)
+
+@router.get("/{match_id}", response_model=MatchResponse)
+async def get_match(
+    match_id,
+    session: AsyncSession = Depends(get_db)
+):
+    repo = SQLMatchRepository(session)
+    service = MatchService(repo)
+    return await service.get_match(match_id)

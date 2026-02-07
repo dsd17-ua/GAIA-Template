@@ -80,7 +80,11 @@ This feature covers the local-first match management system. Since it's MVP and 
    - **Scope**: Atomic updates preferred or simple state overwrite for MVP.
    - **Dependencies**: T01.
 
-3. - [ ] **LMM-TO-003-FE-T03 — Scoreboard Controls**
+3. - [x] **LMM-TO-003-FE-T03** (Scoreboard UI)
+  - [x] `ScoreBoard.tsx` (Component)
+  - [x] `useMatchScore` (Hook)
+  - [x] `MatchDashboardPage` (Integration)
+  - [x] Test component
    - **Type**: FE
    - **Description**: Large buttons for +1 Goal (Local/Visitor) and correction (-1).
    - **Scope**: Optimistic UI updates (React Query w/ `onMutate`).

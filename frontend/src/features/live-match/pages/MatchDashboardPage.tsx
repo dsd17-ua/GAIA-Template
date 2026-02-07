@@ -1,16 +1,25 @@
 import React from "react";
 import { useParams } from "react-router-dom";
 import { GameTimer } from "../components/GameTimer";
+import { ScoreBoard } from "../components/ScoreBoard";
+import { useMatch } from "../api/getMatch";
+import { useMatchScore } from "../hooks/useMatchScore";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 
 export const MatchDashboardPage: React.FC = () => {
     const { id } = useParams<{ id: string }>();
+    const { data: match, isLoading } = useMatch(id || "");
+    const { updateScore, isUpdating } = useMatchScore(id || "");
 
     if (!id) return <div>Invalid Match ID</div>;
+    if (isLoading) return <div>Loading match...</div>;
+    if (!match) return <div>Match not found</div>;
 
     return (
         <div className="container mx-auto p-8 space-y-8">
-            <h1 className="text-3xl font-bold tracking-tight text-foreground">Match Dashboard</h1>
+            <h1 className="text-3xl font-bold tracking-tight text-foreground">
+                {match.home_team} vs {match.visitor_team}
+            </h1>
 
             <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
                 <Card>
@@ -18,17 +27,25 @@ export const MatchDashboardPage: React.FC = () => {
                         <CardTitle>Game Clock</CardTitle>
                     </CardHeader>
                     <CardContent>
-                        <GameTimer matchId={id} />
+                        <GameTimer matchId={id} initialState={{
+                            accumulatedTimeMs: match.accumulated_time_ms || 0,
+                            lastStartTs: match.last_start_ts || null,
+                            isRunning: match.is_running || false
+                        }} />
                     </CardContent>
                 </Card>
 
-                {/* Placeholders for other widgets */}
-                <Card className="opacity-50">
+                <Card>
                     <CardHeader>
                         <CardTitle>Scoreboard</CardTitle>
                     </CardHeader>
                     <CardContent>
-                        Coming soon...
+                        <ScoreBoard
+                            scoreLocal={match.score_local}
+                            scoreVisitor={match.score_visitor}
+                            onUpdateScore={updateScore}
+                            isUpdating={isUpdating}
+                        />
                     </CardContent>
                 </Card>
             </div>

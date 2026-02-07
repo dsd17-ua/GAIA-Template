@@ -1,7 +1,11 @@
 import pytest
-from httpx import AsyncClient
+from httpx import AsyncClient, ASGITransport
 from datetime import datetime
 from uuid import uuid4
+from sqlalchemy.ext.asyncio import AsyncSession
+from app.main import app
+from app.infrastructure.repositories.match_repository import SQLMatchRepository
+from app.domain.match import Match
 
 @pytest.mark.integration
 @pytest.mark.asyncio
@@ -97,3 +101,18 @@ async def test_update_match_score(client: AsyncClient, db_session):
     assert data["score_local"] == 2
     assert data["score_visitor"] == 1
 
+@pytest.mark.integration
+@pytest.mark.asyncio
+async def test_get_match_api(client: AsyncClient, db_session: AsyncSession):
+    # 1. Create
+    repo = SQLMatchRepository(db_session)
+    match = Match(id=uuid4(), home_team="A", visitor_team="B", start_time=datetime.now(), duration_half=30)
+    await repo.save(match)
+    
+    # 2. Get
+    response = await client.get(f"/api/v1/matches/{match.id}")
+    
+    assert response.status_code == 200
+    data = response.json()
+    assert data["id"] == str(match.id)
+    assert data["home_team"] == "A"
