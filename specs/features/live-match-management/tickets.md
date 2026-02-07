@@ -115,7 +115,7 @@ This feature covers the local-first match management system. Since it's MVP and 
    - **Scope**: Generic event logger.
    - **Dependencies**: T01.
 
-3. - [ ] **LMM-TO-004-FE-T03 — Exclusion Timers UI**
+3. - [x] **LMM-TO-004-FE-T03 — Exclusion Timers UI** (2026-02-07)
    - **Type**: FE
    - **Description**: Management of concurrent 2-min timers.
    - **Scope**: "Add Suspension" button. countdowns associated with game clock (pause when game pauses).

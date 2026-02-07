@@ -4,12 +4,19 @@ import { GameTimer } from "../components/GameTimer";
 import { ScoreBoard } from "../components/ScoreBoard";
 import { useMatch } from "../api/getMatch";
 import { useMatchScore } from "../hooks/useMatchScore";
+import { useMatchEvents } from "../hooks/useMatchEvents";
+import { ExclusionList } from "../components/ExclusionList";
+import { AddExclusionDialog } from "../components/AddExclusionDialog";
+import { MatchEventType } from "../services/matchEventService";
+import { useState } from "react";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 
 export const MatchDashboardPage: React.FC = () => {
     const { id } = useParams<{ id: string }>();
     const { data: match, isLoading } = useMatch(id || "");
     const { updateScore, isUpdating } = useMatchScore(id || "");
+    const { exclusions, addEvent } = useMatchEvents(id || "");
+    const [isExclusionModalOpen, setIsExclusionModalOpen] = useState(false);
 
     if (!id) return <div>Invalid Match ID</div>;
     if (isLoading) return <div>Loading match...</div>;
@@ -50,7 +57,34 @@ export const MatchDashboardPage: React.FC = () => {
                         />
                     </CardContent>
                 </Card>
+
+                <Card>
+                    <CardHeader>
+                        <CardTitle>Sanctions</CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                        <ExclusionList
+                            exclusions={exclusions}
+                            onAddExclusion={() => setIsExclusionModalOpen(true)}
+                        />
+                    </CardContent>
+                </Card>
             </div>
+
+            <AddExclusionDialog
+                isOpen={isExclusionModalOpen}
+                onClose={() => setIsExclusionModalOpen(false)}
+                onAdd={(data) => {
+                    addEvent({
+                        event_type: MatchEventType.TWO_MIN,
+                        team_side: data.team_side,
+                        minute: 0, // Should use game timer
+                        player_number: data.player_number
+                    });
+                }}
+                homeTeamName={match.home_team}
+                visitorTeamName={match.visitor_team}
+            />
         </div>
     );
 };

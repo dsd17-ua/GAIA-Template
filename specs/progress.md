@@ -115,3 +115,11 @@
   - `backend/app/application/match_service.py`
   - `backend/app/presentation/routers/matches.py`
 - **Notes**: Implemented `POST /api/v1/matches/{id}/events` with Pydantic V2 schemas and validation. Verified happy path, 404, and 422.
+
+- **Date**: 2026-02-07
+- **Milestone**: Completed LMM-TO-004-FE-T03 (Exclusion UI) (workflow: /execute-plan)
+- **Artifacts**:
+  - `frontend/src/features/live-match/components/ExclusionList.tsx`
+  - `frontend/src/features/live-match/components/AddExclusionDialog.tsx`
+  - `frontend/src/features/live-match/pages/MatchDashboardPage.tsx`
+- **Notes**: Implemented Exclusion UI with "Add Suspension" modal and optimistic state. Integrated with `POST /events`.
