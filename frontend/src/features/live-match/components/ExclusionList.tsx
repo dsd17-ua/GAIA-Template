@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { MatchEvent } from '@/features/live-match/services/matchEventService';
+import type { MatchEvent } from '@/features/live-match/services/matchEventService';
 
 interface ExclusionListProps {
     exclusions: MatchEvent[]; // Only TWO_MIN events

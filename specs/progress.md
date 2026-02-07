@@ -123,3 +123,13 @@
   - `frontend/src/features/live-match/components/AddExclusionDialog.tsx`
   - `frontend/src/features/live-match/pages/MatchDashboardPage.tsx`
 - **Notes**: Implemented Exclusion UI with "Add Suspension" modal and optimistic state. Integrated with `POST /events`.
+
+- **Date**: 2026-02-07
+- **Milestone**: Fixed LMM-BUG-003 (Import Syntax Error) (workflow: /fix-error)
+- **Artifacts**:
+  - `frontend/src/features/live-match/hooks/useMatchEvents.ts`
+  - `frontend/src/features/live-match/components/ExclusionList.tsx`
+- **Notes**:
+  - **Error**: `SyntaxError` due to missing export (actually `verbatimModuleSyntax` issue).
+  - **Root cause**: Type imports were treated as value imports by build tool.
+  - **Fix**: Added `import type` modifier to `MatchEvent` and `CreateMatchEvent` imports.

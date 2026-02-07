@@ -1,5 +1,6 @@
 import { useState } from 'react';
-import { matchEventService, MatchEvent, CreateMatchEvent } from '@/features/live-match/services/matchEventService';
+import { matchEventService } from '@/features/live-match/services/matchEventService';
+import type { MatchEvent, CreateMatchEvent } from '@/features/live-match/services/matchEventService';
 
 export const useMatchEvents = (matchId: string) => {
     const [events, setEvents] = useState<MatchEvent[]>([]);

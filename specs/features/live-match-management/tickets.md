@@ -121,6 +121,12 @@ This feature covers the local-first match management system. Since it's MVP and 
    - **Scope**: "Add Suspension" button. countdowns associated with game clock (pause when game pauses).
    - **Deliverables**: `<ExclusionList />` component.
 
+4. - [x] **LMM-BUG-003 — Fix useMatchEvents Import Error** (2026-02-07)
+   - **Type**: BUG
+   - **Description**: Fix `SyntaxError` due to missing `type` modifier in imports (caused by `verbatimModuleSyntax`).
+   - **Scope**: `useMatchEvents.ts`, `ExclusionList.tsx`, etc.
+   - **Deliverables**: Working build.
+
 ---
 
 ### Story: LMM-TO-005 — Timeouts
