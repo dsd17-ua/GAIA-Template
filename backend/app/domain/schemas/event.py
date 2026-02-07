@@ -1,24 +1,14 @@
-from pydantic import BaseModel, Field, ConfigDict
-from typing import Optional
+from pydantic import BaseModel, ConfigDict
 from datetime import datetime
+from uuid import UUID
+from typing import Optional
 from app.infrastructure.models.match_event import MatchEventType, TeamSide
 
 class CreateMatchEvent(BaseModel):
     event_type: MatchEventType
     team_side: TeamSide
-    minute: int = Field(..., ge=0, le=120)
-    player_number: Optional[int] = Field(None, ge=1, le=99)
-
-    model_config = ConfigDict(
-        json_schema_extra = {
-            "example": {
-                "event_type": "GOAL",
-                "team_side": "LOCAL",
-                "minute": 15,
-                "player_number": 10
-            }
-        }
-    )
+    minute: int
+    player_number: Optional[int] = None
 
 class MatchEventResponse(BaseModel):
     id: str

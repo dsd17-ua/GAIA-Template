@@ -71,7 +71,7 @@ class MatchService:
              raise ValueError("Match not found")
 
         # 2. Create event entity
-        from datetime import datetime
+        from datetime import datetime, timezone
         
         event_data = event_in.model_dump()
         event_data["id"] = str(uuid4())
@@ -84,16 +84,19 @@ class MatchService:
             count = await self.repository.count_events(match_id, event_in.event_type, event_in.team_side)
             if count >= 3:
                 raise ValueError("Timeout limit reached")
+            
+            # [Feature: Timeouts] [Story: LMM-TO-005] [Bug: LMM-BUG-007]
+            # Fix: Stop clock when timeout is called
+            if match.is_running:
+                now = datetime.now(timezone.utc)
+                if match.last_start_ts:
+                    delta = now - match.last_start_ts
+                    match.accumulated_time_ms += int(delta.total_seconds() * 1000)
+                match.is_running = False
+                match.last_start_ts = None
+                await self.repository.update(match)
         
         # 3. Save
-        # We need a proper object to return, or rely on what we created
-        # The repo.save_event takes an object/dict. 
-        # Let's create a temporary object or use the schema + id.
-        
-        # We'll use a simple namespace or modify the schema instance if needed, 
-        # but better to use the model or a specific DTO.
-        # For MVP, passing the dict-like object (Namespace) or the Pydantic model with extra fields is fine.
-        
         class EventDTO:
             def __init__(self, **entries):
                 self.__dict__.update(entries)

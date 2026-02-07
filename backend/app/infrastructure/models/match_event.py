@@ -1,7 +1,6 @@
 import enum
-from sqlalchemy import Column, String, Integer, DateTime, Enum, ForeignKey
+from sqlalchemy import Column, String, Integer, DateTime, ForeignKey, Enum
 from sqlalchemy.dialects.postgresql import UUID
-from sqlalchemy.sql import func
 from app.infrastructure.database import Base
 
 class MatchEventType(str, enum.Enum):
@@ -24,6 +23,4 @@ class MatchEvent(Base):
     team_side = Column(Enum(TeamSide), nullable=False)
     minute = Column(Integer, nullable=False)
     player_number = Column(Integer, nullable=True)
-    created_at = Column(DateTime(timezone=True), server_default=func.now())
-
-    # [Feature: Disciplinary Sanctions] [Story: LMM-TO-004] [Ticket: LMM-TO-004-DB-T01]
+    created_at = Column(DateTime, nullable=True)
