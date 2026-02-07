@@ -3,6 +3,7 @@ from sqlalchemy import select
 from app.domain.match import Match
 from app.domain.ports.match_repository import MatchRepository
 from app.infrastructure.models.match import MatchModel
+from app.infrastructure.models.match_event import MatchEvent
 
 # [Feature: Live Match Management] [Story: LMM-TO-001] [Ticket: LMM-TO-001-BE-T02]
 class SQLMatchRepository(MatchRepository):
@@ -68,3 +69,18 @@ class SQLMatchRepository(MatchRepository):
         await self.session.commit()
         await self.session.refresh(model)
         return Match.model_validate(model)
+
+    async def save_event(self, event_data) -> None:
+        # event_data is dict or schema, we map to MatchEvent model
+        # Assuming event_data is a dict or object with matching fields
+        model = MatchEvent(
+            id=str(event_data.id) if hasattr(event_data, 'id') else str(event_data['id']),
+            match_id=str(event_data.match_id) if hasattr(event_data, 'match_id') else str(event_data['match_id']),
+            event_type=event_data.event_type,
+            team_side=event_data.team_side,
+            minute=event_data.minute,
+            player_number=event_data.player_number,
+            created_at=getattr(event_data, 'created_at', None)
+        )
+        self.session.add(model)
+        await self.session.commit()

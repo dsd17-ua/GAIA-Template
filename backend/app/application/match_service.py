@@ -1,6 +1,7 @@
 from uuid import uuid4
 from app.domain.match import Match
 from app.domain.schemas.match import MatchCreate, MatchScoreUpdate
+from app.domain.schemas.event import CreateMatchEvent, MatchEventResponse
 from app.domain.ports.match_repository import MatchRepository
 
 # [Feature: Live Match Management] [Story: LMM-TO-001] [Ticket: LMM-TO-001-BE-T02]
@@ -62,3 +63,36 @@ class MatchService:
         if not match:
             raise ValueError("Match not found")
         return match
+
+    async def log_event(self, match_id: str, event_in: CreateMatchEvent) -> MatchEventResponse:
+        # 1. Verify match exists
+        match = await self.repository.get_by_id(match_id)
+        if not match:
+             raise ValueError("Match not found")
+
+        # 2. Create event entity
+        from datetime import datetime
+        
+        event_data = event_in.model_dump()
+        event_data["id"] = str(uuid4())
+        event_data["match_id"] = match_id
+        event_data["created_at"] = datetime.now()
+        
+        # 3. Save
+        # We need a proper object to return, or rely on what we created
+        # The repo.save_event takes an object/dict. 
+        # Let's create a temporary object or use the schema + id.
+        
+        # We'll use a simple namespace or modify the schema instance if needed, 
+        # but better to use the model or a specific DTO.
+        # For MVP, passing the dict-like object (Namespace) or the Pydantic model with extra fields is fine.
+        
+        class EventDTO:
+            def __init__(self, **entries):
+                self.__dict__.update(entries)
+                
+        event_obj = EventDTO(**event_data)
+        
+        await self.repository.save_event(event_obj)
+        
+        return MatchEventResponse(**event_data)

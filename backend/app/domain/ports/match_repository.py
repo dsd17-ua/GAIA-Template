@@ -14,3 +14,7 @@ class MatchRepository(ABC):
     @abstractmethod
     async def update(self, match: Match) -> Match:
         pass
+
+    @abstractmethod
+    async def save_event(self, event) -> None:
+        pass

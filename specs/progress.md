@@ -107,3 +107,11 @@
   - `backend/alembic/versions/*_create_match_events_table.py`
   - `backend/tests/integration/test_match_events_repo.py`
 - **Notes**: Created table `match_events` with FK to `matches`. Verified via async integration tests.
+
+- **Date**: 2026-02-07
+- **Milestone**: Completed LMM-TO-004-BE-T02 (Event Logging API) (workflow: /execute-plan)
+- **Artifacts**:
+  - `backend/app/domain/schemas/event.py`
+  - `backend/app/application/match_service.py`
+  - `backend/app/presentation/routers/matches.py`
+- **Notes**: Implemented `POST /api/v1/matches/{id}/events` with Pydantic V2 schemas and validation. Verified happy path, 404, and 422.
