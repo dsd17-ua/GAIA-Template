@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Check } from 'lucide-react';
 import { TeamSide } from '@/features/live-match/services/matchEventService';
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -37,22 +38,35 @@ export const AddExclusionDialog: React.FC<AddExclusionDialogProps> = ({
                 <form onSubmit={handleSubmit} className="space-y-4">
                     <div className="space-y-2">
                         <Label>Team</Label>
-                        <div className="flex gap-4">
+                        <div className="grid grid-cols-2 gap-4">
                             <Button
                                 type="button"
                                 variant={teamSide === TeamSide.LOCAL ? "default" : "outline"}
                                 onClick={() => setTeamSide(TeamSide.LOCAL)}
-                                className="flex-1"
+                                className={`h-24 flex flex-col items-center justify-center gap-2 relative transition-all ${teamSide === TeamSide.LOCAL ? 'ring-2 ring-primary ring-offset-2' : 'hover:bg-accent'}`}
                             >
-                                {homeTeamName}
+                                {teamSide === TeamSide.LOCAL && (
+                                    <div className="absolute top-2 right-2">
+                                        <Check className="h-4 w-4" />
+                                    </div>
+                                )}
+                                <span className="text-xl font-bold">HOME</span>
+                                <span className="text-sm opacity-90 truncate w-full text-center px-2">{homeTeamName}</span>
                             </Button>
+
                             <Button
                                 type="button"
                                 variant={teamSide === TeamSide.VISITOR ? "destructive" : "outline"}
                                 onClick={() => setTeamSide(TeamSide.VISITOR)}
-                                className="flex-1"
+                                className={`h-24 flex flex-col items-center justify-center gap-2 relative transition-all ${teamSide === TeamSide.VISITOR ? 'ring-2 ring-destructive ring-offset-2' : 'hover:bg-accent'}`}
                             >
-                                {visitorTeamName}
+                                {teamSide === TeamSide.VISITOR && (
+                                    <div className="absolute top-2 right-2">
+                                        <Check className="h-4 w-4" />
+                                    </div>
+                                )}
+                                <span className="text-xl font-bold">VISITOR</span>
+                                <span className="text-sm opacity-90 truncate w-full text-center px-2">{visitorTeamName}</span>
                             </Button>
                         </div>
                     </div>
