@@ -92,3 +92,10 @@
   - `frontend/src/features/live-match/pages/MatchDashboardPage.tsx`
   - `backend/app/presentation/routers/matches.py` (Added GET endpoint)
 - **Notes**: Integrated Scoreboard into dashboard. Added optimistic UI updates and GET endpoint.
+
+- **Date**: 2026-02-07
+- **Milestone**: Fixed LMM-BUG-002 (Scoreboard Team Names) (workflow: /fix-error)
+- **Artifacts**:
+  - `frontend/src/features/live-match/components/ScoreBoard.tsx`
+  - `frontend/src/features/live-match/pages/MatchDashboardPage.tsx`
+- **Notes**: Scoreboard now displays actual team names instead of "Local"/"Visitor". Verified with tests.

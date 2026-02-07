@@ -85,6 +85,11 @@ This feature covers the local-first match management system. Since it's MVP and 
   - [x] `useMatchScore` (Hook)
   - [x] `MatchDashboardPage` (Integration)
   - [x] Test component
+
+- [x] **LMM-BUG-002** (Scoreboard Team Names)
+  - [x] Update `ScoreBoard` props
+  - [x] Pass team names from `MatchDashboardPage`
+  - [x] Verify fix
    - **Type**: FE
    - **Description**: Large buttons for +1 Goal (Local/Visitor) and correction (-1).
    - **Scope**: Optimistic UI updates (React Query w/ `onMutate`).

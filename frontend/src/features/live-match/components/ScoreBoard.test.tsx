@@ -9,12 +9,16 @@ describe('ScoreBoard Component', () => {
             <ScoreBoard
                 scoreLocal={10}
                 scoreVisitor={5}
+                homeTeamName="Real Madrid"
+                visitorTeamName="Barça"
                 onUpdateScore={() => { }}
                 isUpdating={false}
             />
         );
         expect(screen.getByText('10')).toBeInTheDocument();
         expect(screen.getByText('5')).toBeInTheDocument();
+        expect(screen.getByText('Real Madrid')).toBeInTheDocument();
+        expect(screen.getByText('Barça')).toBeInTheDocument();
     });
 
     it('interfaces with update callbacks correctly', () => {
@@ -23,6 +27,8 @@ describe('ScoreBoard Component', () => {
             <ScoreBoard
                 scoreLocal={0}
                 scoreVisitor={0}
+                homeTeamName="Local"
+                visitorTeamName="Visitor"
                 onUpdateScore={handleUpdate}
                 isUpdating={false}
             />
@@ -42,6 +48,8 @@ describe('ScoreBoard Component', () => {
             <ScoreBoard
                 scoreLocal={0}
                 scoreVisitor={0}
+                homeTeamName="Local"
+                visitorTeamName="Visitor"
                 onUpdateScore={() => { }}
                 isUpdating={true}
             />

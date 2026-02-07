@@ -5,6 +5,8 @@ import { Button } from '@/components/ui/button'; // Assuming this exists based o
 interface ScoreBoardProps {
     scoreLocal: number;
     scoreVisitor: number;
+    homeTeamName: string;
+    visitorTeamName: string;
     onUpdateScore: (team: 'local' | 'visitor', delta: number) => void;
     isUpdating: boolean;
 }
@@ -12,6 +14,8 @@ interface ScoreBoardProps {
 export const ScoreBoard: React.FC<ScoreBoardProps> = ({
     scoreLocal,
     scoreVisitor,
+    homeTeamName,
+    visitorTeamName,
     onUpdateScore,
     isUpdating
 }) => {
@@ -19,7 +23,7 @@ export const ScoreBoard: React.FC<ScoreBoardProps> = ({
         <div className="flex justify-between items-center p-4 bg-white rounded-lg shadow-md max-w-lg mx-auto border border-gray-100">
             {/* Local Team */}
             <div className="flex flex-col items-center gap-2">
-                <span className="text-sm font-semibold text-gray-500 uppercase tracking-wider">Local</span>
+                <span className="text-sm font-semibold text-gray-500 uppercase tracking-wider">{homeTeamName}</span>
                 <span className="text-6xl font-bold text-gray-900 font-mono tracking-tight">{scoreLocal}</span>
                 <div className="flex gap-2 mt-2">
                     <Button
@@ -47,7 +51,7 @@ export const ScoreBoard: React.FC<ScoreBoardProps> = ({
 
             {/* Visitor Team */}
             <div className="flex flex-col items-center gap-2">
-                <span className="text-sm font-semibold text-gray-500 uppercase tracking-wider">Visitor</span>
+                <span className="text-sm font-semibold text-gray-500 uppercase tracking-wider">{visitorTeamName}</span>
                 <span className="text-6xl font-bold text-gray-900 font-mono tracking-tight">{scoreVisitor}</span>
                 <div className="flex gap-2 mt-2">
                     <Button

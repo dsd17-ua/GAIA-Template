@@ -43,6 +43,8 @@ export const MatchDashboardPage: React.FC = () => {
                         <ScoreBoard
                             scoreLocal={match.score_local}
                             scoreVisitor={match.score_visitor}
+                            homeTeamName={match.home_team}
+                            visitorTeamName={match.visitor_team}
                             onUpdateScore={updateScore}
                             isUpdating={isUpdating}
                         />
