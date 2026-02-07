@@ -16,5 +16,9 @@ class MatchRepository(ABC):
         pass
 
     @abstractmethod
+    async def count_events(self, match_id: str, event_type: str, team_side: str) -> int:
+        pass
+
+    @abstractmethod
     async def save_event(self, event) -> None:
         pass

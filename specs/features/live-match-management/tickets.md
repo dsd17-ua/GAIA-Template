@@ -147,11 +147,12 @@ This feature covers the local-first match management system. Since it's MVP and 
    - **Scope**: Migration or Reuse `match_events`. Let's use `matches` count for simplicity or events. (Decision: Events table is better). Reuse LMM-TO-004-DB-T01.
    - **Description**: Verify `match_events` handles TIMEOUT type.
 
-2. - [ ] **LMM-TO-005-BE-T02 — Timeout Validation Logic**
+2. - [x] **LMM-TO-005-BE-T02 — Timeout Validation Logic** (2026-02-07)
    - **Type**: BE
    - **Description**: Ensure max 3 timeouts per team.
    - **Scope**: Validation in `POST /events`.
    - **Dependencies**: LMM-TO-004-BE-T02.
+   - **Deliverables**: Unit test + MatchService logic.
 
 3. - [ ] **LMM-TO-005-FE-T03 — Timeout Button & Counter**
    - **Type**: FE

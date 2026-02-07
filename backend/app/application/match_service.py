@@ -77,6 +77,13 @@ class MatchService:
         event_data["id"] = str(uuid4())
         event_data["match_id"] = match_id
         event_data["created_at"] = datetime.now()
+
+        # [Feature: Timeouts] [Story: LMM-TO-005] [Ticket: LMM-TO-005-BE-T02]
+        from app.infrastructure.models.match_event import MatchEventType
+        if event_in.event_type == MatchEventType.TIMEOUT:
+            count = await self.repository.count_events(match_id, event_in.event_type, event_in.team_side)
+            if count >= 3:
+                raise ValueError("Timeout limit reached")
         
         # 3. Save
         # We need a proper object to return, or rely on what we created

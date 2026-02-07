@@ -84,3 +84,13 @@ class SQLMatchRepository(MatchRepository):
         )
         self.session.add(model)
         await self.session.commit()
+
+    async def count_events(self, match_id: str, event_type: str, team_side: str) -> int:
+        from sqlalchemy import func
+        statement = select(func.count()).select_from(MatchEvent).where(
+            MatchEvent.match_id == match_id,
+            MatchEvent.event_type == event_type,
+            MatchEvent.team_side == team_side
+        )
+        result = await self.session.execute(statement)
+        return result.scalar_one()

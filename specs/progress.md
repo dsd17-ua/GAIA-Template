@@ -154,3 +154,11 @@
   - `backend/tests/integration/test_timeout_event.py`
   - `backend/app/infrastructure/models/match_event.py`
 - **Notes**: Verified `TIMEOUT` event type persistence with integration test. (Enum was already present from previous recovery).
+
+- **Date**: 2026-02-07
+- **Milestone**: Completed LMM-TO-005-BE-T02 (Timeout Validation)
+- **Artifacts**:
+  - `backend/app/application/match_service.py`
+  - `backend/app/infrastructure/repositories/match_repository.py`
+  - `backend/tests/unit/test_timeout_rules.py`
+- **Notes**: Implemented 3-timeout limit rule per team. Added `count_events` to Repository. Verified with Unit Tests.
