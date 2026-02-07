@@ -154,11 +154,11 @@ This feature covers the local-first match management system. Since it's MVP and 
    - **Dependencies**: LMM-TO-004-BE-T02.
    - **Deliverables**: Unit test + MatchService logic.
 
-3. - [ ] **LMM-TO-005-FE-T03 — Timeout Button & Counter**
+3. - [x] **LMM-TO-005-FE-T03 — Timeout Button & Counter** (2026-02-07)
    - **Type**: FE
-   - **Description**: UI to request timeout.
-   - **Scope**: Stop clock automatically when pressed. Show indicators (bubbles) of used timeouts.
-   - **Deliverables**: Timeout controls.
+   - **Description**: Button to disable calling timeout if limit reached.
+   - **Scope**: `TimeoutControls` component.
+   - **Deliverables**: UI + Integration.rs (bubbles) of used timeouts.
 
 ---
 

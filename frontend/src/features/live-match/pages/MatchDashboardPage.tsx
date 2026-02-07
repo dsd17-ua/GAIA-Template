@@ -7,7 +7,8 @@ import { useMatchScore } from "../hooks/useMatchScore";
 import { useMatchEvents } from "../hooks/useMatchEvents";
 import { ExclusionList } from "../components/ExclusionList";
 import { AddExclusionDialog } from "../components/AddExclusionDialog";
-import { MatchEventType } from "../services/matchEventService";
+import { TimeoutControls } from "../components/TimeoutControls";
+import { MatchEventType, TeamSide } from "../services/matchEventService";
 import { useState } from "react";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 
@@ -15,8 +16,11 @@ export const MatchDashboardPage: React.FC = () => {
     const { id } = useParams<{ id: string }>();
     const { data: match, isLoading } = useMatch(id || "");
     const { updateScore, isUpdating } = useMatchScore(id || "");
-    const { exclusions, addEvent } = useMatchEvents(id || "");
+    const { exclusions, events, addEvent } = useMatchEvents(id || "");
     const [isExclusionModalOpen, setIsExclusionModalOpen] = useState(false);
+
+    const timeoutsLocal = events.filter(e => e.event_type === MatchEventType.TIMEOUT && e.team_side === TeamSide.LOCAL).length;
+    const timeoutsVisitor = events.filter(e => e.event_type === MatchEventType.TIMEOUT && e.team_side === TeamSide.VISITOR).length;
 
     if (!id) return <div>Invalid Match ID</div>;
     if (isLoading) return <div>Loading match...</div>;
@@ -66,6 +70,26 @@ export const MatchDashboardPage: React.FC = () => {
                         <ExclusionList
                             exclusions={exclusions}
                             onAddExclusion={() => setIsExclusionModalOpen(true)}
+                        />
+                    </CardContent>
+                </Card>
+
+                <Card>
+                    <CardHeader>
+                        <CardTitle>Timeouts</CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                        <TimeoutControls
+                            timeoutsUsedLocal={timeoutsLocal}
+                            timeoutsUsedVisitor={timeoutsVisitor}
+                            isGameRunning={match.is_running || false}
+                            homeTeamName={match.home_team}
+                            visitorTeamName={match.visitor_team}
+                            onCallTimeout={(side) => addEvent({
+                                event_type: MatchEventType.TIMEOUT,
+                                team_side: side,
+                                minute: 0 // Should use game timer
+                            })}
                         />
                     </CardContent>
                 </Card>

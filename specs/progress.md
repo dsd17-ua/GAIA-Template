@@ -162,3 +162,10 @@
   - `backend/app/infrastructure/repositories/match_repository.py`
   - `backend/tests/unit/test_timeout_rules.py`
 - **Notes**: Implemented 3-timeout limit rule per team. Added `count_events` to Repository. Verified with Unit Tests.
+
+- **Date**: 2026-02-07
+- **Milestone**: Completed LMM-TO-005-FE-T03 (Timeout UI)
+- **Artifacts**:
+  - `frontend/src/features/live-match/components/TimeoutControls.tsx`
+  - `frontend/src/features/live-match/pages/MatchDashboardPage.tsx`
+- **Notes**: Added Timeout Controls with visual indicators. Integrated with `POST /events`. Verified in browser.
